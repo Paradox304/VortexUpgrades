@@ -8,3 +8,5 @@ You can set the cost of the upgrade as well. The gun that it will be upgraded or
 /checkupgrade (Gun Name/Gun ID) = Check if the gun can be upgraded and for how much and what is the chance on it. (Permission: checkupgrade)
 
 /upgrade (Gun Name/Gun ID) = Upgrade your gun. (Permission: upgrade)
+
+To download the plugin go over here: https://github.com/Paradox304/VortexUpgrades/releases/tag/V1.0
