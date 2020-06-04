@@ -29,7 +29,7 @@ namespace VortexUpgrades.Commands
             ItemAsset item = GetItem.GetItemAsset(gunName);
             if (item == null)
             {
-                UnturnedChat.Say(rocketPlayer, "Gun name or id is wrong");
+                UnturnedChat.Say(rocketPlayer, Main.Instance.Translate("GunNameWrong"));
                 return;
             }
 
@@ -46,16 +46,13 @@ namespace VortexUpgrades.Commands
             }
             if (!foundConfig)
             {
-                UnturnedChat.Say(rocketPlayer, "This gun isn't available for any upgrades.");
+                UnturnedChat.Say(rocketPlayer, Main.Instance.Translate("UpgradeNotAvailable", item.name));
                 return;
             }
 
             if (foundConfig)
             {
-                UnturnedChat.Say($"{item.name} is available for upgrade.");
-                UnturnedChat.Say($"Cost: {g.Cost}");
-                UnturnedChat.Say($"Upgrade Chance: {g.UpgradeChance}%");
-                UnturnedChat.Say($"Downgrade Chance: {g.DowngradeChance}%");
+                UnturnedChat.Say(rocketPlayer, Main.Instance.Translate("UpgradeFound", item.name, g.Cost, g.UpgradeChance, g.DowngradeChance));
             }
         }
     }

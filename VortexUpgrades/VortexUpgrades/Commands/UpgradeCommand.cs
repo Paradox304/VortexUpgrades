@@ -35,7 +35,7 @@ namespace VortexUpgrades.Commands
             ItemAsset item = GetItem.GetItemAsset(gunName);
             if (item == null)
             {
-                UnturnedChat.Say(rocketPlayer, "Gun name or id is wrong");
+                UnturnedChat.Say(rocketPlayer, Main.Instance.Translate("GunNameWrong"));
                 return;
             }
 
@@ -53,7 +53,7 @@ namespace VortexUpgrades.Commands
             }
             if (!foundConfig)
             {
-                UnturnedChat.Say(rocketPlayer, "You can't upgrade this gun, check which guns you can upgrade by doing /checkUpgrade (Gun Name/ID)");
+                UnturnedChat.Say(rocketPlayer, Main.Instance.Translate("CantUpgrade"));
                 return;
             }
 
@@ -80,7 +80,7 @@ namespace VortexUpgrades.Commands
             }
             if (!foundItem)
             {
-                UnturnedChat.Say(rocketPlayer, $"You don't have {item.name} in your inventory.");
+                UnturnedChat.Say(rocketPlayer, Main.Instance.Translate("ItemNotInInventory", item.name));
                 return;
             }
 
@@ -88,7 +88,7 @@ namespace VortexUpgrades.Commands
             decimal playerBalance = Uconomy.Instance.Database.GetBalance(player.CSteamID.ToString());
             if (playerBalance < g.Cost)
             {
-                UnturnedChat.Say(rocketPlayer, "You don't have enough balance for this upgrade.");
+                UnturnedChat.Say(rocketPlayer, Main.Instance.Translate("NotEnoughBalance"));
                 return;
             }
 
@@ -96,7 +96,7 @@ namespace VortexUpgrades.Commands
             if (g.UpgradeChance >= UnityEngine.Random.Range(1, 101))
             {
                 ItemAsset upgradeItem = GetItem.GetItemAsset(g.Upgrades[UnityEngine.Random.Range(0, g.Upgrades.Count)].ToString());
-                UnturnedChat.Say(rocketPlayer, $"You won and upgraded your gun to {upgradeItem.name}");
+                UnturnedChat.Say(rocketPlayer, Main.Instance.Translate("Upgrade", upgradeItem.name));
                 Uconomy.Instance.Database.IncreaseBalance(player.CSteamID.ToString(), -g.Cost);
                 player.Player.inventory.removeItem(page, index);
                 player.Player.inventory.forceAddItem(new Item(upgradeItem.id, true), true);
@@ -105,7 +105,7 @@ namespace VortexUpgrades.Commands
             else if (g.DowngradeChance >= UnityEngine.Random.Range(1, 101)) // If player lost
             {
                 ItemAsset downgradeItem = GetItem.GetItemAsset(g.Downgrades[UnityEngine.Random.Range(0, g.Downgrades.Count)].ToString());
-                UnturnedChat.Say(rocketPlayer, $"You lost and downgraded your gun to {downgradeItem.name}");
+                UnturnedChat.Say(rocketPlayer, Main.Instance.Translate("Downgrade", downgradeItem.name));
                 Uconomy.Instance.Database.IncreaseBalance(player.CSteamID.ToString(), -g.Cost);
                 player.Player.inventory.removeItem(page, index);
                 player.Player.inventory.forceAddItem(new Item(downgradeItem.id, true), true);
@@ -113,7 +113,7 @@ namespace VortexUpgrades.Commands
             }
             else // Player lost gun
             {
-                UnturnedChat.Say(rocketPlayer, $"You lost your gun");
+                UnturnedChat.Say(rocketPlayer, Main.Instance.Translate("Lost"));
                 Uconomy.Instance.Database.IncreaseBalance(player.CSteamID.ToString(), -g.Cost);
                 player.Player.inventory.removeItem(page, index);
                 return;
