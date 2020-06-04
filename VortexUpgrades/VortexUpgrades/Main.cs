@@ -14,14 +14,14 @@ namespace VortexUpgrades
         {
             Instance = this;
 
-            Logger.Log("GunUpgrades plugin has been loaded.");
+            Logger.Log("VortexUpgrades plugin has been loaded.");
             Logger.Log("Version: 1.0");
             Logger.Log("Made by Paradox.");
         }
 
         protected override void Unload()
         {
-            Logger.Log("GunUpgrades plugin has been unloaded.");
+            Logger.Log("VortexUpgrades plugin has been unloaded.");
         }
 
         public static Main Instance;
